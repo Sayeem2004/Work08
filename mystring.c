@@ -93,3 +93,12 @@ char* mystrstr(char *s1, char *s2) {
     }
     return NULL;
 }
+
+char* mysplit(char *s, char d) {
+    char *cs = s;
+    while (*cs != '\0') {
+        if (*cs == d) *cs = '\0';
+        cs++;
+    }
+    return s;
+}

@@ -69,5 +69,52 @@ int main() {
     printf("\t\t[standard]:\t[%p]\n", strstr("abababccc", "\0"));
     printf("\t\t[mine]:\t\t[%p]\n", mystrstr("abababccc", "\0"));
 
+    char *s4 = strdup("abc,def,ghi");
+    char *s5 = strdup(s4);
+    char *s6 = strdup("abc,def,ghi");
+    char *s7 = strdup(s6);
+    char *s8 = strdup("\0");
+    char *s9 = strdup(s8);
+    printf("\nstart strings:\n");
+    printf("s4: [%s]\n", s4);
+    printf("s5: [%s]\n", s5);
+    printf("s6: [%s]\n", s6);
+    printf("s7: [%s]\n", s7);
+    printf("s8: [%s]\n", s8);
+    printf("s9: [%s]\n", s9);
+
+    printf("\nTesting strsep(s4, \",\")\n");
+    s5 = mysplit(s5,',');
+    int i = 0;
+    while (s4 != NULL) {
+        printf("Iteration %d:\n", i); i++;
+        printf("\t[standard]:\t[%s]\n", strsep(&s4,","));
+        printf("\t[mine]:\t\t[%s]\n", s5);
+        while (*s5 != '\0') s5++;
+        s5++;
+    }
+
+    printf("\nTesting strsep(s6, \"z\")\n");
+    s7 = mysplit(s7,'z');
+    i = 0;
+    while (s6 != NULL) {
+        printf("Iteration %d:\n", i); i++;
+        printf("\t[standard]:\t[%s]\n", strsep(&s6,"z"));
+        printf("\t[mine]:\t\t[%s]\n", s7);
+        while (*s7 != '\0') s7++;
+        s7++;
+    }
+
+    printf("\nTesting strsep(s8, \"z\")\n");
+    s9 = mysplit(s9,'z');
+    i = 0;
+    while (s8 != NULL) {
+        printf("Iteration %d:\n", i); i++;
+        printf("\t[standard]:\t[%s]\n", strsep(&s8,"\0"));
+        printf("\t[mine]:\t\t[%s]\n", s9);
+        while (*s9 != '\0') s9++;
+        s9++;
+    }
+    
     return 0;
 }
